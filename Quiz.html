@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:  cursive; 
+        }
+        .main{
+            width: 100vw;
+            height: 100vh;
+            background-color: rgb(43, 29, 49);
+            display: grid;
+            place-items: center;
+        }
+        .main .box{
+            width: 70%;
+            height: auto;
+            height: auto;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+            padding: 30px;
+            background-color: rgb(224, 227, 229);
+            border-radius: 6px;
+        }
+        .main .box .question_box{
+            display: grid;
+            place-items: center;
+            /* border: 2px solid red; */
+        }
+        .main .box .question_box h2{
+            margin-bottom: 20px;
+        }
+        .main .box .question_box ul li{
+            margin: 10px;
+            color: rgb(105, 104, 104);
+        }
+        .main .box .question_box ul li input{
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin-right: 13px;
+        }
+        .main .box .btn_box .btn{
+             background-color: rgb(43, 28, 59);
+             padding: 8px 18px;
+             margin-top: 20px;
+             color: white;
+             border: none;
+             border-radius: 2px;
+             cursor: pointer;
+             font-size: 1rem;
+        }
+        .main .box .btn_box .btn:hover{
+             background-color: rgb(51, 33, 70);
+        }
+        ul{
+            list-style: none;
+        }
+        ul li{
+            margin: 40px;
+        }
+        .btn_box_answer{
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            /* border: 2px solid red; */
+            margin-top: 10px;
+            padding: 10px;
+            width: 50%;
+            border-radius: 6px;
+        }
+        .btn_box_answer .answer{
+            margin: auto;
+            width: auto;
+            /* border: 2px solid black; */
+        }
+        .btn_box_answer .answer h1{
+            text-align: center;
+        }
+       
+        .btn_box_answer .answer div button{
+            width: 100%;
+            background-color: yellowgreen;  
+            cursor: pointer;
+            padding: 8px 18px;
+            border: none;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 1rem;
+            color: rgb(237, 234, 234);
+        }
+        .btn_box_answer{
+            display: none;
+        }
+        .btn_box_answer .answer div button:hover{
+            background-color: yellowgreen;
+        }
+      
+    </style>
+</head>
+<body>
+    <div class="main">
+           <div class="box">
+                 <div class="question_box">
+                    <h2 id="question">Q1: This is question </h2>
+                    <ul>
+                        <li>
+                            <input type="radio" id="ans1" name="answer" class="ans"/>
+                            <label for="ans1" id="option1">This is yatahrth shukk</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="ans2" name="answer" class="ans"/>
+                            <label for="ans2" id="option2">This is yatahrth shukk</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="ans3" name="answer" class="ans"/>
+                            <label for="ans3" id="option3">This is yatahrth shukk</label>
+                        </li>
+                        <li>
+                            <input type="radio" id="ans4" name="answer" class="ans"/>
+                            <label for="ans4" id="option4">This is yatahrth shukk</label>
+                        </li>
+                    </ul>
+                    <div class="btn_box">
+                        <input type="submit" id="btn" class="btn" value="SUBMIT">
+                    </div>
+
+
+                    <div class="btn_box_answer">
+                           <div class="answer">
+                               <h1 class="totoalscr"></h1>
+                               <div>
+                                <button onclick="location.reload()">PLAY AGAIN</button>
+                               </div>
+                           </div>
+                    </div>
+                 </div>
+           </div>
+    </div>
+</body>
+ <script>
+     const quizDB= [
+          {
+            question: "Q1: What is the full form of HTML?",
+            a: "Hellow To My Land",
+            b: "Hey Text Marking Language",
+            c: "HyperText Makeup Language",
+            d: "HyperText Makeup Language",
+            ans: "ans4",
+          },
+          {
+            question: "Q2: What is the full form of CSS?",
+            a: "Cascading Style Sheets",
+            b: "Cascading Style Sheep",
+            c: "Cartoon Style Sheets",
+            d: "Cascading Supre sheets",
+            ans: "ans1"
+          },
+          {
+            question: "Q3: What is the full form of HTTP?",
+            a: "Hypertext Transform Product",
+            b: "Hypertext Test Protocal",
+            c: "Hey transfer Protocol",
+            d: "Hypertext Transform Protocal",
+            ans: "ans4"
+          },
+          {
+            question: "Q4: What is the full form of JS?",
+            a: "JAVASCRIPT",
+            b: "javasuper",
+            c: "javasc",
+            d: "JAVAsorce",
+            ans: "ans1"
+          }
+     ];
+    //  Refrence of element
+    const question= document.querySelector("#question");
+    const option1 = document.querySelector("#option1");
+    const option2 = document.querySelector("#option2");
+    const option3 = document.querySelector("#option3");
+    const option4 = document.querySelector("#option4");
+    const submit = document.querySelector("#btn");
+
+    const ans = document.querySelectorAll(".ans");
+
+    const totalscore = document.querySelector('.btn_box_answer');
+    const totoalscr = document.querySelector('.totoalscr');
+
+    // globali varable
+    let questionCount =0;
+    let score =0;
+    // set a question when page is lode
+    const loadQuestion =()=>{
+       question.innerText = quizDB[questionCount].question;
+
+       option1.innerText = quizDB[questionCount].a;
+       option2.innerText = quizDB[questionCount].b;
+       option3.innerText = quizDB[questionCount].c;
+       option4.innerText = quizDB[questionCount].d;
+    }
+    loadQuestion();
+    // checke the answer and return it id
+    const getCheckAnswer=()=>{
+       let answer;
+        ans.forEach((cur)=>{
+            if(cur.checked){
+                answer = cur.id
+            }
+        });
+        return answer;
+    }
+
+    // clear the ckecked box 
+    const deselectAll =()=>{
+          ans.forEach(cur=> cur.checked = false);
+    }
+
+    // onclick it will cahnage the elememt of question
+    submit.addEventListener("click", ()=>{
+        // it terurn the checked id
+         const checkedAnswer = getCheckAnswer();
+        //  checked wither id is matcher with answer 
+         if(checkedAnswer === quizDB[questionCount].ans){
+            score++;
+         }
+        //  incress the vale of number 
+         questionCount++;
+        //  clear the check value
+         deselectAll();
+        //  it git the question on the baseic of length
+         if(questionCount < quizDB.length){
+            loadQuestion();
+
+         }else{
+        
+            // it dicpley the score of question
+            totalscore.style.display = "block";
+            totoalscr.innerText=`${score}/4`;
+         }
+    })
+ </script>
+</html>
